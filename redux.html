@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Redux</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.js"></script>
 </head>
 <body>
-$END$
+
+<div>
+   <button onclick="store.dispatch(incAction)">INCREMENT</button>
+    <h1 id="counter"></h1>
+    <button onclick="store.dispatch(decAction)">DECREMENT</button>
+</div>
+
+<script>
+    /*
+        1. define your actions
+            INC and DEC
+        2. code your reducer
+     */
+
+    let incAction = {type: 'INC'};
+    let decAction = {type: 'DEC'};
+
+    let initialState = {counter: 1};
+
+    const reducer = (prevState = initialState, action) => {
+        console.log(action);
+        switch (action.type) {
+            case 'INC':
+                return {counter: prevState.counter + 1};
+                break;
+            case 'DEC':
+                return {counter: prevState.counter - 1};
+                break;
+            default:
+                return prevState;
+        }
+    };
+
+    const store = Redux.createStore(reducer);
+
+    store.subscribe(() => {
+        console.log(store.getState());
+        document.getElementById('counter').innerText = store.getState().counter;
+    });
+
+    store.dispatch({type:'START'})
+
+
+
+</script>
 </body>
 </html>
