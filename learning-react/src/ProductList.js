@@ -4,6 +4,7 @@ import ProductListItem from "./ProductListItem";
 class ProductList extends React.Component {
 
     constructor(props) {
+        console.log('constructor');
         super(props);
         this.addToCart = this.addToCart.bind(this);
         this.removeFromCart = this.removeFromCart.bind(this);
@@ -40,6 +41,31 @@ class ProductList extends React.Component {
         }
     }
 
+    componentWillMount() {
+        console.log('componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount',arguments);
+    }
+
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps', arguments);
+    }
+
+    shouldComponentUpdate(){
+        console.log('shouldComponentUpdate', arguments);
+        return true;
+    }
+
+    componentWillUpdate(){
+        console.log('componentWillUpdate', arguments);
+    }
+
+    componentDidUpdate(){
+        console.log('componentDidUpdate', arguments);
+    }
+
     addToCart(id) {
         let {cart} = this.state;
         if (!cart.find(n => n === id)) {
@@ -57,6 +83,7 @@ class ProductList extends React.Component {
     }
 
     render() {
+        console.log('render');
         const {products, cart} = this.state;
         return (
             <div>

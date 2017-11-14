@@ -1,15 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import {Link} from "react-router-dom";
 
-function ProductListItem(props) {
-    const {product, onButtonClick, buttonLabel} = props;
-    const {title, price, qty, id} = product;
-    return (<div style={styles.wrapper}>
-        <h3>{title}</h3>
-        <h2>{price}</h2>
-        <h4>{qty}</h4>
-        <button onClick={() => onButtonClick(id)}>{buttonLabel}</button>
-    </div>)
+class ProductListItem extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+        console.log('componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount',arguments);
+    }
+
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps', arguments);
+    }
+
+    shouldComponentUpdate(nextProps,nextState){
+        console.log(this.props,nextProps);
+        return true;//this.props.buttonLabel !== nextProps.buttonLabel;
+    }
+
+    componentWillUpdate(){
+        console.log('componentWillUpdate', arguments);
+    }
+
+    componentDidUpdate(){
+        console.log('componentDidUpdate', arguments);
+    }
+
+    render() {
+        console.log('render*********')
+        const {product, onButtonClick, buttonLabel} = this.props;
+        const {title, price, qty, id} = product;
+        return (<div style={styles.wrapper}>
+            <Link to={`/products/${id}`}><h3>{title}</h3></Link>
+            <h2>{price}</h2>
+            <h4>{qty}</h4>
+            <button onClick={() => onButtonClick(id)}>{buttonLabel}</button>
+        </div>)
+    }
+
 }
 
 ProductListItem.propTypes = {
