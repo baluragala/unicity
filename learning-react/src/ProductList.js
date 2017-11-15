@@ -6,7 +6,7 @@ class ProductList extends React.Component {
     constructor(props) {
         console.log('constructor');
         super(props);
-        this.addToCart = this.addToCart.bind(this);
+        /*this.addToCart = this.addToCart.bind(this);
         this.removeFromCart = this.removeFromCart.bind(this);
         this.state = {
             products: [
@@ -38,10 +38,10 @@ class ProductList extends React.Component {
                     qty: 20
                 }],
             cart: []
-        }
+        }*/
     }
 
-    componentWillMount() {
+    /*componentWillMount() {
         console.log('componentWillMount');
     }
 
@@ -80,14 +80,15 @@ class ProductList extends React.Component {
             delete cart[cart.findIndex(n => n === id)]
         }
         this.setState({cart})
-    }
+    }*/
 
     render() {
         console.log('render');
-        const {products, cart} = this.state;
+        const {products,cart} = this.props;
         return (
             <div>
                 <h3>Product List:[{cart.join(',')}]</h3>
+
                 {products.map(p => <ProductListItem key={p.id}
                                                     product={p}
                                                     onButtonClick={cart.find(n => n === p.id) ? this.removeFromCart : this.addToCart}

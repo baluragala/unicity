@@ -33,11 +33,11 @@ class ProductListItem extends React.Component {
     }
 
     render() {
-        console.log('render*********')
+        console.log('render*********');
         const {product, onButtonClick, buttonLabel} = this.props;
         const {title, price, qty, id} = product;
         return (<div style={styles.wrapper}>
-            <Link to={`/products/${id}`}><h3>{title}</h3></Link>
+            <h3>{title}</h3>
             <h2>{price}</h2>
             <h4>{qty}</h4>
             <button onClick={() => onButtonClick(id)}>{buttonLabel}</button>
@@ -46,7 +46,7 @@ class ProductListItem extends React.Component {
 
 }
 
-ProductListItem.propTypes = {
+/*ProductListItem.propTypes = {
     buttonLabel: PropTypes.string.isRequired,
     onButtonClick: PropTypes.func.isRequired,
     product: PropTypes.shape({
@@ -55,7 +55,7 @@ ProductListItem.propTypes = {
         qty: PropTypes.number.isRequired,
         id: PropTypes.number.isRequired
     })
-};
+};*/
 
 const styles = {
     wrapper: {

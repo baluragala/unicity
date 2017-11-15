@@ -8,6 +8,8 @@ import HomePage from "./HomePage";
 import About from "./About";
 import NotFound from "./NotFound";
 import ProductDetail from "./ProductDetail";
+import {connect} from "react-redux";
+import {getProducts} from "./actionCreators";
 
 class App extends Component {
     constructor(props) {
@@ -23,17 +25,37 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <Nav/>
-                <Switch>
+                <button onClick={this.props.getProductsFromStore}>Get Products</button>
+                {this.props.isLoading && <p>Loading...</p>}
+                {this.props.error && <p>Something went wrong, please try again...</p>}
+                <ProductList products={this.props.products} cart={[]}/>
+                {/*<Switch>
                     <Route exact path="/" component={HomePage}/>
                     <Route path="/about" component={About}/>
-                    <Route exact path="/products" component={props => <ProductList/>}/>
+                    <Route exact path="/products"
+                           component={props => <ProductList products={this.props.products} cart={[]}/>}/>
                     <Route path="/products/:pid" component={ProductDetail}/>
                     <Route component={NotFound}/>
-                </Switch>
+                </Switch>*/}
             </div>
         );
     }
 }
 
-export default App;
+
+function mapStateToProps(state) {
+    return {
+        products: state.products,
+        cart: state.cart,
+        isLoading: state.isLoading,
+        error: state.error
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getProductsFromStore: () => dispatch(getProducts())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
